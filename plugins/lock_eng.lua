@@ -1,3 +1,4 @@
+
 antienglish = {}-- An empty table for solving multiple kicking problem
 
 do
@@ -7,12 +8,12 @@ if msg.to.type == 'chat' then
     return
   end
   local data = load_data(_config.moderation.data)
-  if data[tostring(msg.to.id)]['settings']['lock_eng'] then
-    if data[tostring(msg.to.id)]['settings']['lock_eng'] == 'yes' then
+  if data[tostring(msg.to.id)]['settings']['lock_english'] then
+    if data[tostring(msg.to.id)]['settings']['lock_english'] == 'yes' then
       if antienglish[msg.from.id] == true then 
         return
       end
-      send_large_msg("chat#id".. msg.to.id , "english words is not allowed here⛔️")
+      send_large_msg("chat#id".. msg.to.id , "English is not allowed here")
       local name = user_print_name(msg.from)
       savelog(msg.to.id, name.." ["..msg.from.id.."] kicked (english was locked) ")
       chat_del_user('chat#id'..msg.to.id,'user#id'..msg.from.id,ok_cb,false)
@@ -27,6 +28,11 @@ local function cron()
   antienglish = {} -- Clear antienglish table 
 end
 return {
+description = "lockeng",
+usage = {
+moderator = {
+"!<lock/unlock> english : english is allowed or not allowed to group" },
+},
   patterns = {
     "(a)",
 	"(o)",
@@ -48,3 +54,5 @@ return {
 }
 
 end
+--Status API Training Shop Blog About
+--© 2016 GitHub, Inc. Terms Privacy Security Contact Help
